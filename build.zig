@@ -241,7 +241,7 @@ pub fn build(b: *std.Build) void {
                     "libs/imgui/backends/imgui_impl_glfw.cpp",
                     "libs/imgui/backends/imgui_impl_wgpu.cpp",
                 },
-                .flags = cflags,
+                .flags = &(cflags.* ++ .{"-DGLFW_INCLUDE_NONE"}),
             });
         },
         .glfw_opengl3 => {
@@ -265,7 +265,7 @@ pub fn build(b: *std.Build) void {
                     "libs/imgui/backends/imgui_impl_glfw.cpp",
                     "libs/imgui/backends/imgui_impl_dx12.cpp",
                 },
-                .flags = cflags,
+                .flags = &(cflags.* ++ .{"-DGLFW_INCLUDE_NONE"}),
             });
             imgui.linkSystemLibrary("d3dcompiler_47");
         },
